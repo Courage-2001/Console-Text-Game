@@ -13,7 +13,9 @@ private:
 		int strength = 10;
 		int intelligence = 10;
 	};
-	void processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player);
 	PlayerData player;
+	void processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player);
+	void processClass(PlayerData& player);
 	std::vector<std::string> getDetails();
+
 };

@@ -33,60 +33,64 @@ void CharacterCreation::processInput(int input, int& selectedOption, bool& runni
             redraw = true;
         }
         else if (selectedOption == 1) {
-            bool classSelected = false;
-            int selectedClass = 0;
-            std::vector<std::string> classList = { "Warrior", "Mage" };
-            bool submenuRedraw = true;
-            Menu menu;
-            while (classSelected == false) {
-                if (submenuRedraw == true) {
-                    system("cls");
-                    for (int i = 0; i < classList.size(); i++)
-                    {
-                        if (i == selectedClass)
-                            std::cout << " > " << classList[i] << '\n';
-                        else
-                            std::cout << "   " << classList[i] << '\n';
-                    }
-                    submenuRedraw = false;
-                }
-                int input = menu.getInput();
-                switch (input)
-                {
-                case 0: 
-                    break;
-                case 1: 
-                    if (selectedClass > 0) {
-                        selectedClass--;
-                        submenuRedraw = true;
-                    }
-                    else if (selectedClass == 0) {
-                        selectedClass = classList.size() - 1;
-                        submenuRedraw = true;
-                    }
-                    break;
-                case 2: 
-                    if (selectedClass < classList.size() - 1) {
-                        selectedClass++;
-                        submenuRedraw = true;
-                    }
-                    else if (selectedClass == classList.size() - 1) {
-                        selectedClass = 0;
-                        submenuRedraw = true;
-                    }
-                    break;
-                case 3: 
-                    player.characterClass = classList[selectedClass];
-                    classSelected = true;
-                    break;
-                }
-            }
+            processClass(player);
         }
         redraw = true;
         break;
     case 4: 
         running = false;
         break;
+    }
+}
+
+void CharacterCreation::processClass(PlayerData& player) {
+    bool classSelected = false;
+    int selectedClass = 0;
+    std::vector<std::string> classList = { "Warrior", "Mage" };
+    bool submenuRedraw = true;
+    Menu submenu;
+    while (classSelected == false) {
+        if (submenuRedraw == true) {
+            system("cls");
+            for (int i = 0; i < classList.size(); i++)
+            {
+                if (i == selectedClass)
+                    std::cout << " > " << classList[i] << '\n';
+                else
+                    std::cout << "   " << classList[i] << '\n';
+            }
+            submenuRedraw = false;
+        }
+        int input = submenu.getInput();
+        switch (input)
+        {
+        case 0:
+            break;
+        case 1:
+            if (selectedClass > 0) {
+                selectedClass--;
+                submenuRedraw = true;
+            }
+            else if (selectedClass == 0) {
+                selectedClass = classList.size() - 1;
+                submenuRedraw = true;
+            }
+            break;
+        case 2:
+            if (selectedClass < classList.size() - 1) {
+                selectedClass++;
+                submenuRedraw = true;
+            }
+            else if (selectedClass == classList.size() - 1) {
+                selectedClass = 0;
+                submenuRedraw = true;
+            }
+            break;
+        case 3:
+            player.characterClass = classList[selectedClass];
+            classSelected = true;
+            break;
+        }
     }
 }
 
