@@ -1,9 +1,9 @@
 #include "CharacterCreation.hpp"
 
-void CharacterCreation::processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame) {
+void CharacterCreation::processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame) {
     Menu menu;
     menu.navigateOptions(input, selectedOption, optionCount, redraw);
-    if (input == 3) { // Enter
+    if (input == Menu::Keyboard::Enter) {
         if (selectedOption == 0) {
             system("cls");
             std::cout << "Enter a name: ";
@@ -28,7 +28,7 @@ void CharacterCreation::processInput(int input, int& selectedOption, bool& runni
         }
         redraw = true;
     }
-    if (input == 4) { //Escape
+    if (input == Menu::Keyboard::Escape) {
         running = false;
     }
 }
@@ -51,9 +51,9 @@ void CharacterCreation::processClass(PlayerData& player) {
         if (submenuRedraw == true) {
             submenu.displayMenu(classList, selectedClass, submenuRedraw);
         }
-        int input = submenu.getInput();
+        Menu::Keyboard input = submenu.getInput();
         submenu.navigateOptions(input, selectedClass, classList.size(), submenuRedraw);
-        if(input == 3) {
+        if(input == Menu::Keyboard::Enter) {
             if (player.characterClass == classList[selectedClass]) {
                 system("cls");
                 std::cout << "You have already selected this class!";
@@ -95,10 +95,10 @@ void CharacterCreation::processTraits(PlayerData& player) {
         if (submenuRedraw == true) {
             submenu.displayMenu(traitList, selectedTrait, submenuRedraw);
         }
-        int input = submenu.getInput();
+        Menu::Keyboard input = submenu.getInput();
         submenu.navigateOptions(input, selectedTrait, traitList.size(), submenuRedraw);
-        if (input == 3) {
-            exists = std::find(player.traits.begin(), player.traits.end(), traitList[selectedTrait]) != player.traits.end();
+        if (input == Menu::Keyboard::Enter) {
+            exists = std::find(player.traits.begin(), player.traits.end(), traitData[selectedTrait].traitName) != player.traits.end();
             if (!exists && player.numberOfTraits < 2) {
                 player.traits.push_back(traitData[selectedTrait].traitName);
                 player.health += traitData[selectedTrait].healthModifier;
@@ -147,7 +147,7 @@ bool CharacterCreation::run() {
     while (running) {
         const std::vector<std::string> details = getDetails(); // can be costly once more variables are introduced
         menu.displayMenu(details, selectedOption, redraw);
-        int input = menu.getInput();
+        Menu::Keyboard input = menu.getInput();
         processInput(input, selectedOption, running, details.size(), redraw, player, startGame);
     }
     return startGame;

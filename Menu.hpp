@@ -8,6 +8,7 @@ class Menu
 public:
     enum class Keyboard
     {
+        Null = -1,
         SpecialKey = 0,
         ExtendedKey = 224,
 
@@ -21,7 +22,7 @@ public:
     };
 
     void displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw);
-    int getInput();
-    void navigateOptions(int input, int& selectedOption, int optionCount, bool& redraw);
+    Keyboard getInput() const;
+    void navigateOptions(Keyboard input, int& selectedOption, int optionCount, bool& redraw);
 };
 

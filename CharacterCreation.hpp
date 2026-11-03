@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "Menu.hpp"
+#include <string>
 #include <algorithm>
 #include <thread>
 #include <chrono>
@@ -18,6 +18,7 @@ private:
 		int intelligence = 10;
 		int numberOfTraits = 0;
 	};
+	// Need to move traits to a character system class or something. 
 	struct Traits {
 		std::string traitName;
 		std::string traitDescription;
@@ -26,7 +27,7 @@ private:
 		int intelligenceModifier;
 	};
 	PlayerData player;
-	void processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame);
+	void processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame);
 	void processClass(PlayerData& player);
 	void processTraits(PlayerData& player);
 	std::vector<std::string> getDetails();

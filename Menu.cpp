@@ -19,28 +19,28 @@ void Menu::displayMenu(const std::vector<std::string>& options, int selectedOpti
     }
 }
 
-int Menu::getInput() {
+Menu::Keyboard Menu::getInput() const {
     int key = _getch();
     if (key == static_cast<int>(Keyboard::SpecialKey) || key == static_cast<int>(Keyboard::ExtendedKey)) {
         key = _getch();
         switch (static_cast<Keyboard>(key)) {
-        case Keyboard::UpArrow: return 1;
-        case Keyboard::DownArrow: return 2;
+        case Keyboard::UpArrow: return Keyboard::UpArrow;
+        case Keyboard::DownArrow: return Keyboard::DownArrow;
         }
     }
     switch (static_cast<Keyboard>(key)) {
-    case Keyboard::Enter: return 3;
-    case Keyboard::Escape: return 4;
+    case Keyboard::Enter: return Keyboard::Enter;
+    case Keyboard::Escape: return Keyboard::Escape;
     }
-    return 0;
+    return Keyboard::Null;
 }
 
-void Menu::navigateOptions(int input, int& selectedOption, int optionCount, bool& redraw) {
+void Menu::navigateOptions(Keyboard input, int& selectedOption, int optionCount, bool& redraw) {
     switch (input)
     {
-    case 0: // Do nothing
+    case Keyboard::Null: // Do nothing
         break;
-    case 1: // Up
+    case Keyboard::UpArrow: // Up
         if (selectedOption > 0) {
             selectedOption--;
             redraw = true;
@@ -50,7 +50,7 @@ void Menu::navigateOptions(int input, int& selectedOption, int optionCount, bool
             redraw = true;
         }
         break;
-    case 2: // Down
+    case Keyboard::DownArrow: // Down
         if (selectedOption < optionCount - 1) {
             selectedOption++;
             redraw = true;

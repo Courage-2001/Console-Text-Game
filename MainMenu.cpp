@@ -1,15 +1,18 @@
 #include "MainMenu.hpp"
 
-void MainMenu::processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, bool& startCreation) {
+void MainMenu::processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, bool& startCreation) {
     Menu menu;
     menu.navigateOptions(input, selectedOption, optionCount, redraw);
-    if (input == 3) { // Enter
+    if (input == Menu::Keyboard::Enter) {
         if (selectedOption == 0) {
             startCreation = true;
             running = false;
         }
+        else if (selectedOption == optionCount - 1) {
+            running = false;
+        }
     }
-    if (input == 4) { // Escape
+    if (input == Menu::Keyboard::Escape) {
         running = false;
     }
     redraw = true;
@@ -30,8 +33,8 @@ bool MainMenu::run() {
 
     while (running) {
         menu.displayMenu(options, selectedOption, redraw);
-        int input = menu.getInput();
-        processInput(input, selectedOption, running, options.size() - 1, redraw, startCreation);
+        Menu::Keyboard input = menu.getInput();
+        processInput(input, selectedOption, running, options.size(), redraw, startCreation);
     }
     return startCreation;
 }

@@ -5,5 +5,5 @@ class MainMenu {
 public:
     bool run();
 private: 
-	void processInput(int input, int& selectedOption, bool& running, int optionCount, bool& redraw, bool& startCreation);
+	void processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, bool& startCreation);
 };
