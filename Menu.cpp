@@ -1,5 +1,6 @@
 #include "Menu.hpp"
 
+//Eventually need to pass in variable that dynamically changes menu title depending on which menu is active
 void Menu::displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw) {
     if (redraw == true) {
         system("cls");
@@ -32,4 +33,32 @@ int Menu::getInput() {
     case Keyboard::Escape: return 4;
     }
     return 0;
+}
+
+void Menu::navigateOptions(int input, int& selectedOption, int optionCount, bool& redraw) {
+    switch (input)
+    {
+    case 0: // Do nothing
+        break;
+    case 1: // Up
+        if (selectedOption > 0) {
+            selectedOption--;
+            redraw = true;
+        }
+        else if (selectedOption == 0) {
+            selectedOption = optionCount - 1;
+            redraw = true;
+        }
+        break;
+    case 2: // Down
+        if (selectedOption < optionCount - 1) {
+            selectedOption++;
+            redraw = true;
+        }
+        else if (selectedOption == optionCount - 1) {
+            selectedOption = 0;
+            redraw = true;
+        }
+        break;
+    }
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu.hpp"
+
 class MainMenu {
 public:
     bool run();

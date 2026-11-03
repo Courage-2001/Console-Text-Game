@@ -22,5 +22,6 @@ public:
 
     void displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw);
     int getInput();
+    void navigateOptions(int input, int& selectedOption, int optionCount, bool& redraw);
 };
 
