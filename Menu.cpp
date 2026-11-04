@@ -45,11 +45,26 @@ void Menu::displayActionMenu(const std::vector<std::string>& menuOptions, const 
 
 void Menu::displayLoadingScreen() {
     system("cls");
-    for (int i = 0; i < loading_screen_.size(); i++) {
-        std::cout << loading_screen_[i] << '\n';
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    // Gathering Dimensions of rows and columns (in this case how many characters exist in 1 row)
+    size_t rows = loading_screen_.size();
+    size_t columns = 0;
+    for (const auto& line : loading_screen_) {
+        columns = std::max(columns, line.length());
     }
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    // the command is ESC[row;columnH , \033 represents ESC, signalling beginning of terminal command in ANSI
+    // reversed loop so that we properly print ASCII image correctly
+    for (size_t col = 0; col < columns; col++) {
+        for (size_t row = 0; row < rows; row++) {
+            std::cout << "\033[" << row + 1 << ";" << col + 1 << "H";
+
+            if (col < loading_screen_[row].length()) {
+                std::cout << loading_screen_[row][col]; 
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 Menu::Keyboard Menu::getInput() const {
