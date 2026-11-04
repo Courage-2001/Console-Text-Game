@@ -1,8 +1,8 @@
 #include "MainMenu.hpp"
 
-void MainMenu::processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, bool& startCreation) {
+void MainMenu::processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, bool& startCreation) {
     Menu menu;
-    menu.navigateOptions(input, selectedOption, optionCount, redraw);
+    menu.navigateOptions(input, selectedOption, optionCount, firstOption, redraw);
     if (input == Menu::Keyboard::Enter) {
         if (selectedOption == 0) {
             startCreation = true;
@@ -27,6 +27,7 @@ bool MainMenu::run() {
 
     Menu menu;
     int selectedOption = 0;
+    int firstOption = 0;
     bool running = true;
     bool redraw = true;
     bool startCreation = false;
@@ -34,7 +35,7 @@ bool MainMenu::run() {
     while (running) {
         menu.displayMenu(options, selectedOption, redraw);
         Menu::Keyboard input = menu.getInput();
-        processInput(input, selectedOption, running, options.size(), redraw, startCreation);
+        processInput(input, selectedOption, firstOption, running, options.size(), redraw, startCreation);
     }
     return startCreation;
 }

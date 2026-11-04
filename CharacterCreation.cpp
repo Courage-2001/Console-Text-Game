@@ -1,8 +1,8 @@
 #include "CharacterCreation.hpp"
 
-void CharacterCreation::processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame) {
+void CharacterCreation::processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, PlayerData& player, bool& startGame) {
     Menu menu;
-    menu.navigateOptions(input, selectedOption, optionCount, redraw);
+    menu.navigateOptions(input, selectedOption, optionCount, firstOption, redraw);
     if (input == Menu::Keyboard::Enter) {
         if (selectedOption == 0) {
             system("cls");
@@ -36,6 +36,7 @@ void CharacterCreation::processInput(Menu::Keyboard input, int& selectedOption, 
 void CharacterCreation::processClass(PlayerData& player) {
     bool classSelected = false;
     int selectedClass = 0;
+    int firstOption = 0;
     bool submenuRedraw = true;
     Menu submenu;
     std::vector<std::string> classList;
@@ -52,7 +53,7 @@ void CharacterCreation::processClass(PlayerData& player) {
             submenu.displayMenu(classList, selectedClass, submenuRedraw);
         }
         Menu::Keyboard input = submenu.getInput();
-        submenu.navigateOptions(input, selectedClass, classList.size(), submenuRedraw);
+        submenu.navigateOptions(input, selectedClass, classList.size(), firstOption, submenuRedraw);
         if(input == Menu::Keyboard::Enter) {
             if (player.characterClass == classList[selectedClass]) {
                 system("cls");
@@ -80,6 +81,7 @@ void CharacterCreation::processClass(PlayerData& player) {
 void CharacterCreation::processTraits(PlayerData& player) {
     bool traitSelected = false;
     int selectedTrait = 0;
+    int firstOption = 0;
     bool submenuRedraw = true;
     bool exists = false;
     Menu submenu;
@@ -96,7 +98,7 @@ void CharacterCreation::processTraits(PlayerData& player) {
             submenu.displayMenu(traitList, selectedTrait, submenuRedraw);
         }
         Menu::Keyboard input = submenu.getInput();
-        submenu.navigateOptions(input, selectedTrait, traitList.size(), submenuRedraw);
+        submenu.navigateOptions(input, selectedTrait, traitList.size(), firstOption, submenuRedraw);
         if (input == Menu::Keyboard::Enter) {
             exists = std::find(player.traits.begin(), player.traits.end(), traitData[selectedTrait].traitName) != player.traits.end();
             if (!exists && player.numberOfTraits < 2) {
@@ -140,6 +142,7 @@ std::vector<std::string> CharacterCreation::getDetails() {
 bool CharacterCreation::run() {
 	Menu menu;
     int selectedOption = 0;
+    int firstOption = 0;
     bool running = true;
     bool redraw = true;
     bool startGame = false;
@@ -148,7 +151,7 @@ bool CharacterCreation::run() {
         const std::vector<std::string> details = getDetails(); // can be costly once more variables are introduced
         menu.displayMenu(details, selectedOption, redraw);
         Menu::Keyboard input = menu.getInput();
-        processInput(input, selectedOption, running, details.size(), redraw, player, startGame);
+        processInput(input, selectedOption, firstOption, running, details.size(), redraw, player, startGame);
     }
     return startGame;
 }

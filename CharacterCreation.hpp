@@ -1,9 +1,6 @@
 #pragma once
 #include "Menu.hpp"
 #include <string>
-#include <algorithm>
-#include <thread>
-#include <chrono>
 
 class CharacterCreation {
 public:
@@ -27,7 +24,7 @@ private:
 		int intelligenceModifier;
 	};
 	PlayerData player;
-	void processInput(Menu::Keyboard input, int& selectedOption, bool& running, int optionCount, bool& redraw, PlayerData& player, bool& startGame);
+	void processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, PlayerData& player, bool& startGame);
 	void processClass(PlayerData& player);
 	void processTraits(PlayerData& player);
 	std::vector<std::string> getDetails();
