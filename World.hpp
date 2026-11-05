@@ -13,7 +13,8 @@ public:
 	enum class SubLocationID {
 		TOWN_SQUARE,
 		BLACKSMITH,
-		GENERAL_STORE
+		GENERAL_STORE, 
+		OPEN_FIELD
 	};
 
 	struct SubLocation {
@@ -31,7 +32,7 @@ public:
 	};
 
 	World();
-	std::vector<LocationID> getAvailableDestinations(const LocationID& id) const;
+	std::vector<std::string> getAvailableDestinations(const LocationID& id) const;
 	std::vector<Location> getAllLocations() const;
 private:
 	std::vector<Location> locations_;

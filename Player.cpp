@@ -1,29 +1,44 @@
 #include "Player.hpp"
 
 Player::Player() {
-
+    currentLocationID_ = World::LocationID::STARTING_TOWN;
+    currentSubLocationID_ = World::SubLocationID::TOWN_SQUARE;
+    current_local_map_ = getCurrentLocationData(currentLocationID_).local_map;
 }
 
 Player::Player(const std::string& playername) {
     name_ = playername;
-    currentLocation_ = World::LocationID::STARTING_TOWN;
-    currentSubLocation_ = World::SubLocationID::TOWN_SQUARE;
+    currentLocationID_ = World::LocationID::STARTING_TOWN;
+    currentSubLocationID_ = World::SubLocationID::TOWN_SQUARE;
+    current_local_map_ = getCurrentLocationData(currentLocationID_).local_map;
 }
 
 void Player::setCurrentLocation(World::LocationID id) {
-    currentLocation_ = id;
+    currentLocationID_ = id;
+}
+
+void Player::setCurrentSubLocation(World::SubLocationID id) {
+    currentSubLocationID_ = id;
+}
+
+void Player::setCurrentLocalMap(World::LocationID id) {
+    current_local_map_ = getCurrentLocationData(id).local_map;
+}
+
+std::vector<std::string> Player::getLocalMap() const {
+    return current_local_map_;
 }
 
 World::LocationID Player::getCurrentLocationID() const {
-    return currentLocation_;
+    return currentLocationID_;
 }
 
 World::SubLocationID Player::getSublocationID() const {
-    return currentSubLocation_;
+    return currentSubLocationID_;
 }
 
 // need to add check if id is not in world
-World::Location Player::getCurrentLocation(const World::LocationID& currentLocation_) const {
+World::Location Player::getCurrentLocationData(const World::LocationID& currentLocation_) const {
     World world;
     for (auto& area : world.getAllLocations()) {
         if (currentLocation_ == area.id)
@@ -33,9 +48,10 @@ World::Location Player::getCurrentLocation(const World::LocationID& currentLocat
  
 std::string Player::getSubLocation(const World::SubLocationID& currentSubLocation_) const {
     World world;
-    World::Location area = getCurrentLocation(getCurrentLocationID());
+    World::Location area = getCurrentLocationData(currentLocationID_);
     for (auto& subarea : area.subLocations) {
         if (getSublocationID() == subarea.id)
             return subarea.sublocation_name;
     }
+    return "Null";
 }

@@ -31,7 +31,7 @@ World::World() {
 				{ SubLocationID::TOWN_SQUARE, "Town Square" },
 				{ SubLocationID::BLACKSMITH , "Blacksmith" },
 				{ SubLocationID::GENERAL_STORE, "General Store" }
-			}
+			}, 
 		},
 
 		{
@@ -40,7 +40,9 @@ World::World() {
 			"The great plains were once kind to the settlers of the land",
 			{},
 			{ LocationID::STARTING_TOWN },
-			{}
+			{
+				{SubLocationID::OPEN_FIELD, "Open Field"}
+			}
 		},
 
 		{
@@ -54,12 +56,18 @@ World::World() {
 	};
 }
 
-std::vector<World::LocationID> World::getAvailableDestinations(const LocationID& id) const {
+std::vector<std::string> World::getAvailableDestinations(const LocationID& id) const {
+	std::vector<std::string> destinations;
 	for (auto& area : locations_) {
-		if (area.id == id)
-			return area.connectedLocations;
+		auto it = area.connectedLocations.begin();
+		while (it != area.connectedLocations.end()) {
+			if (id == *it) {
+				destinations.push_back(area.location_name);
+			}
+			++it;
+		}
 	}
-	return {};
+	return destinations;
 }
 
 std::vector<World::Location> World::getAllLocations() const {
