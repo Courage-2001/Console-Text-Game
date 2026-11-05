@@ -30,7 +30,8 @@ World::World() {
 			{
 				{ SubLocationID::TOWN_SQUARE, "Town Square" },
 				{ SubLocationID::BLACKSMITH , "Blacksmith" },
-				{ SubLocationID::GENERAL_STORE, "General Store" }
+				{ SubLocationID::GENERAL_STORE, "General Store" },
+				{ SubLocationID::RETURN, "Return" }
 			}, 
 		},
 
@@ -41,7 +42,8 @@ World::World() {
 			{},
 			{ LocationID::STARTING_TOWN },
 			{
-				{SubLocationID::OPEN_FIELD, "Open Field"}
+				{ SubLocationID::OPEN_FIELD, "Open Field" },
+				{ SubLocationID::RETURN, "Return" },
 			}
 		},
 

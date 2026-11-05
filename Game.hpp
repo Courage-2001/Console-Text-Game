@@ -6,6 +6,7 @@
 class Game {
 public:
     Game();
+    Game(const CharacterCreation::PlayerData& playerData);
     void gameLoop();
     std::vector<std::string> getActionMenu();
     void processInput(Menu::Keyboard& input, int selectedOption, int first_option_, bool& running, size_t optionCount, bool& redraw);

@@ -4,6 +4,10 @@ Game::Game() {
 	location_data_ = player_.getCurrentLocationData(player_.getCurrentLocationID());
 }
 
+Game::Game(const CharacterCreation::PlayerData& playerData) : player_(playerData) {
+	location_data_ = player_.getCurrentLocationData(player_.getCurrentLocationID());
+}
+
 void Game::processInput(Menu::Keyboard& input, int selectedOption, int firstOption, bool& running, size_t optionCount, bool& redraw) {
 	menu_.navigateOptions(input, selected_option_, optionCount, firstOption, redraw);
 	if (input == Menu::Keyboard::Enter) {
@@ -13,7 +17,8 @@ void Game::processInput(Menu::Keyboard& input, int selectedOption, int firstOpti
 		else if (selected_option_ == 6) {
 			std::vector<std::string> sublocationList;
 			for (auto& location : location_data_.subLocations) {
-				sublocationList.push_back(location.sublocation_name);
+				if(location.id != player_.getSublocationID())
+					sublocationList.push_back(location.sublocation_name);
 			}
 			processLocalAction(input, selectedOption, firstOption, redraw, sublocationList);
 		}
@@ -21,6 +26,10 @@ void Game::processInput(Menu::Keyboard& input, int selectedOption, int firstOpti
 			executeAction(input, selectedOption, firstOption, redraw);
 		}
 		redraw = true;
+	}
+	if (input == Menu::Keyboard::KeyC) {
+		menu_.displayActionMenu(getActionMenu(), player_.generateCharacterSheet(), selectedOption, redraw);
+		redraw = false;
 	}
 	if (input == Menu::Keyboard::Escape) {
 		running = false;
@@ -47,6 +56,7 @@ void Game::Travel(Menu::Keyboard& input, int& selectedOption, int& firstOption, 
 					player_.setCurrentLocation(location.id);
 					player_.setCurrentLocalMap(location.id);
 					player_.setCurrentSubLocation(location.subLocations[0].id);
+					location_data_ = player_.getCurrentLocationData(location.id);
 					locationSelected = true;
 				}
 			}
@@ -66,8 +76,11 @@ void Game::processLocalAction(Menu::Keyboard& input, int& selectedOption, int& f
 		input = menu_.getInput();
 		menu_.navigateOptions(input, selectedOption, subLocationList.size(), firstOption, redraw);
 		if (input == Menu::Keyboard::Enter) {
-			auto& sublocation = location_data_.subLocations[selectedOption].id;
-			player_.setCurrentSubLocation(sublocation);
+			for (auto& location : location_data_.subLocations) {
+				if (location.sublocation_name == subLocationList[selectedOption] && location.id != World::SubLocationID::RETURN) {
+					player_.setCurrentSubLocation(location.id);
+				}
+			}
 			subLocationSeleceted = true;
 		}
 	}

@@ -14,7 +14,8 @@ public:
 		TOWN_SQUARE,
 		BLACKSMITH,
 		GENERAL_STORE, 
-		OPEN_FIELD
+		OPEN_FIELD,
+		RETURN,
 	};
 
 	struct SubLocation {

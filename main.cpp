@@ -8,7 +8,7 @@ int main()
     if (menu.run() == true) {
         CharacterCreation create;
         if (create.run() == true) {
-            Game startGame;
+            Game startGame(create.getPlayerData());
             startGame.gameLoop();
         }
     }

@@ -6,8 +6,8 @@ Player::Player() {
     current_local_map_ = getCurrentLocationData(currentLocationID_).local_map;
 }
 
-Player::Player(const std::string& playername) {
-    name_ = playername;
+Player::Player(const CharacterCreation::PlayerData& playerData) {
+    player_ = playerData;
     currentLocationID_ = World::LocationID::STARTING_TOWN;
     currentSubLocationID_ = World::SubLocationID::TOWN_SQUARE;
     current_local_map_ = getCurrentLocationData(currentLocationID_).local_map;
@@ -54,4 +54,19 @@ std::string Player::getSubLocation(const World::SubLocationID& currentSubLocatio
             return subarea.sublocation_name;
     }
     return "Null";
+}
+
+std::vector<std::string> Player::generateCharacterSheet() const {
+    std::string traits;
+    for (auto i : player_.traits) {
+        traits = traits + i + ", ";
+    }
+    return {
+        "Name: " + player_.name,
+        "Class: " + player_.characterClass,
+        "Traits: " + traits,
+        "Health: " + std::to_string(player_.health),
+        "Strength: " + std::to_string(player_.strength),
+        "Intelligence: " + std::to_string(player_.intelligence),
+    };
 }

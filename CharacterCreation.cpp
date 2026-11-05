@@ -125,18 +125,22 @@ void CharacterCreation::processTraits(PlayerData& player) {
 
 std::vector<std::string> CharacterCreation::getDetails() {
     std::string traits;
-    for (auto i : player.traits) {
+    for (auto i : player_.traits) {
         traits = traits + i + ", ";
     }
     return {
-        "Name: " + player.name,
-        "Class: " + player.characterClass,
+        "Name: " + player_.name,
+        "Class: " + player_.characterClass,
         "Traits: " + traits,
-        "Health: " + std::to_string(player.health),
-        "Strength: " + std::to_string(player.strength),
-        "Intelligence: " + std::to_string(player.intelligence),
+        "Health: " + std::to_string(player_.health),
+        "Strength: " + std::to_string(player_.strength),
+        "Intelligence: " + std::to_string(player_.intelligence),
         "Start game"
     };
+}
+
+CharacterCreation::PlayerData CharacterCreation::getPlayerData() const {
+    return player_;
 }
 
 bool CharacterCreation::run() {
@@ -151,7 +155,7 @@ bool CharacterCreation::run() {
         const std::vector<std::string> details = getDetails(); // can be costly once more variables are introduced
         menu.displayMenu(details, selectedOption, redraw);
         Menu::Keyboard input = menu.getInput();
-        processInput(input, selectedOption, firstOption, running, details.size(), redraw, player, startGame);
+        processInput(input, selectedOption, firstOption, running, details.size(), redraw, player_, startGame);
     }
     return startGame;
 }

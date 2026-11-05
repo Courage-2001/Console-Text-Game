@@ -79,6 +79,7 @@ Menu::Keyboard Menu::getInput() const {
     switch (static_cast<Keyboard>(key)) {
     case Keyboard::Enter: return Keyboard::Enter;
     case Keyboard::Escape: return Keyboard::Escape;
+    case Keyboard::KeyC: return Keyboard::KeyC;
     }
     return Keyboard::Null;
 }

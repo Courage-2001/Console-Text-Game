@@ -4,8 +4,6 @@
 
 class CharacterCreation {
 public:
-	bool run();
-private:
 	struct PlayerData {
 		std::string name = "ENTER NAME";
 		std::string characterClass = "ENTER CLASS";
@@ -15,6 +13,10 @@ private:
 		int intelligence = 10;
 		int numberOfTraits = 0;
 	};
+
+	PlayerData getPlayerData() const;
+	bool run();
+private:
 	// Need to move traits to a character system class or something. 
 	struct Traits {
 		std::string traitName;
@@ -23,7 +25,7 @@ private:
 		int strengthModifier;
 		int intelligenceModifier;
 	};
-	PlayerData player;
+	PlayerData player_;
 	void processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, PlayerData& player, bool& startGame);
 	void processClass(PlayerData& player);
 	void processTraits(PlayerData& player);

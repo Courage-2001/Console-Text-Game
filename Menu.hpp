@@ -22,7 +22,9 @@ public:
         RightArrow = 77,
 
         Enter = 13,
-        Escape = 27
+        Escape = 27,
+
+        KeyC = 99
     };
 
     void displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw);
