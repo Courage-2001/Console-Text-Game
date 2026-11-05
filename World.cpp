@@ -53,20 +53,21 @@ World::World() {
 			"Do not venture deep into the forest, as the commoners say...",
 			{},
 			{ LocationID::STARTING_TOWN },
-			{}
+			{
+				{SubLocationID::RETURN, "Return"},
+			}
 		}
 	};
 }
 
-std::vector<std::string> World::getAvailableDestinations(const LocationID& id) const {
+std::vector<std::string> World::getAvailableDestinations(const LocationID& locID) const {
 	std::vector<std::string> destinations;
-	for (auto& area : locations_) {
-		auto it = area.connectedLocations.begin();
-		while (it != area.connectedLocations.end()) {
-			if (id == *it) {
-				destinations.push_back(area.location_name);
+	for (const auto& location : locations_) {
+		for (const auto& connectionID : location.connectedLocations) {
+			if (connectionID == locID) {
+				destinations.push_back(location.location_name);
+				break;
 			}
-			++it;
 		}
 	}
 	return destinations;

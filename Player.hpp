@@ -7,19 +7,19 @@ class Player {
 public:
     Player();
     Player(const CharacterCreation::PlayerData& playerData);
-    void setCurrentLocation(World::LocationID id);
-    void setCurrentSubLocation(World::SubLocationID id);
-    void setCurrentLocalMap(World::LocationID id);
+    void setCurrentLocation(World::Location loc);
+    void setCurrentSubLocation(World::SubLocation subLoc);
+    void setCurrentLocalMap(World::LocationID locID);
     std::vector<std::string> getLocalMap() const;
-    World::LocationID getCurrentLocationID() const;
-    World::SubLocationID getSublocationID() const;
+    World::Location getCurrentLocation() const;
+    World::SubLocation getCurrentSubLocation() const;
     World::Location getCurrentLocationData(const World::LocationID& currentLocation_) const;
-    std::string getSubLocation(const World::SubLocationID& currentSubLocation_) const;
+    std::vector<std::string> getSubLocationStr(const World::Location& location_data_) const;
     std::vector<std::string> generateCharacterSheet() const;
 private:
     CharacterCreation::PlayerData player_;
-    World::LocationID currentLocationID_;
-    World::SubLocationID currentSubLocationID_;
+    World::Location currentLocation_;
+    World::SubLocation currentSubLocation_;
     std::vector<std::string> current_local_map_;
 };
 

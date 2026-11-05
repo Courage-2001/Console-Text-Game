@@ -16,15 +16,16 @@ public:
 		GENERAL_STORE, 
 		OPEN_FIELD,
 		RETURN,
+		INVALID
 	};
 
 	struct SubLocation {
-		SubLocationID id;
+		SubLocationID subID;
 		std::string sublocation_name;
 	};
 
 	struct Location {
-		LocationID id;
+		LocationID locID;
 		std::string location_name;
 		std::string description;
 		std::vector<std::string> local_map;
@@ -33,7 +34,7 @@ public:
 	};
 
 	World();
-	std::vector<std::string> getAvailableDestinations(const LocationID& id) const;
+	std::vector<std::string> getAvailableDestinations(const LocationID& locID) const;
 	std::vector<Location> getAllLocations() const;
 private:
 	std::vector<Location> locations_;

@@ -19,8 +19,8 @@ void Menu::displayMenu(const std::vector<std::string>& options, int selectedOpti
     }
 }
 
-void Menu::displayActionMenu(const std::vector<std::string>& menuOptions, const std::vector<std::string>& localmap, int selectedOption, bool& redraw) {
-    if (redraw == true) {
+void Menu::displayActionMenu(const std::vector<std::string>& menuOptions, const std::vector<std::string>& localmap, int selectedOption, bool& redraw_) {
+    if (redraw_ == true) {
         system("cls");
         size_t maxLines = std::max(menuOptions.size(), localmap.size());
 
@@ -84,7 +84,7 @@ Menu::Keyboard Menu::getInput() const {
     return Keyboard::Null;
 }
 
-void Menu::navigateOptions(Keyboard& input, int& selectedOption, size_t optionCount, int& firstOption, bool& redraw) {
+void Menu::navigateOptions(Keyboard& input, int& selectedOption, size_t optionCount, int& firstOption, bool& redraw_) {
     switch (input)
     {
     case Keyboard::Null: // Do nothing
@@ -92,22 +92,19 @@ void Menu::navigateOptions(Keyboard& input, int& selectedOption, size_t optionCo
     case Keyboard::UpArrow: // Up
         if (selectedOption > firstOption) {
             selectedOption--;
-            redraw = true;
         }
         else if (selectedOption == firstOption) {
             selectedOption = optionCount - 1;
-            redraw = true;
         }
         break;
     case Keyboard::DownArrow: // Down
         if (selectedOption < optionCount - 1) {
             selectedOption++;
-            redraw = true;
         }
         else if (selectedOption == optionCount - 1) {
             selectedOption = firstOption;
-            redraw = true;
         }
+        redraw_ = true;
         break;
     }
 }
