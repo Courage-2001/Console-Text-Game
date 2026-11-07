@@ -28,10 +28,10 @@ World::World() {
 		},
 			{ LocationID::ROLLING_PLAINS, LocationID::FOREST },
 			{
-				{ SubLocationID::TOWN_SQUARE, "Town Square" },
-				{ SubLocationID::BLACKSMITH , "Blacksmith" },
-				{ SubLocationID::GENERAL_STORE, "General Store" },
-				{ SubLocationID::RETURN, "Return" }
+				{ SubLocationID::TOWN_SQUARE, "Town Square", { "Look at the quest board", "Stand around", "Return to previous menu" } },
+				{ SubLocationID::BLACKSMITH , "Blacksmith", { "Forge a weapon", "Chat", "Return to previous menu" } },
+				{ SubLocationID::GENERAL_STORE, "General Store", { "Buy", "Sell", "Return to previous menu" } },
+				{ SubLocationID::RETURN, "Return",{} }
 			}, 
 		},
 
@@ -42,8 +42,8 @@ World::World() {
 			{},
 			{ LocationID::STARTING_TOWN },
 			{
-				{ SubLocationID::OPEN_FIELD, "Open Field" },
-				{ SubLocationID::RETURN, "Return" },
+				{ SubLocationID::OPEN_FIELD, "Open Field",{ "Explore", "Return to previous menu" }},
+				{ SubLocationID::RETURN, "Return",{} },
 			}
 		},
 
@@ -54,7 +54,7 @@ World::World() {
 			{},
 			{ LocationID::STARTING_TOWN },
 			{
-				{SubLocationID::RETURN, "Return"},
+				{ SubLocationID::RETURN, "Return",{} },
 			}
 		}
 	};

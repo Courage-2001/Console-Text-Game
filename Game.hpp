@@ -2,6 +2,7 @@
 #include "World.hpp"
 #include "Player.hpp"
 #include "Menu.hpp"
+#include "Enemy.hpp"
 
 class Game {
 public:

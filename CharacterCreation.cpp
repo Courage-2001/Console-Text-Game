@@ -63,13 +63,13 @@ void CharacterCreation::processClass(PlayerData& player) {
             else {
                 for (auto i : classData) {
                     if (player.characterClass == i.characterClass) {
-                        player.health -= i.health;
+                        player.maxHealth -= i.maxHealth;
                         player.strength -= i.strength;
                         player.intelligence -= i.intelligence;
                     }
                 }
                 player.characterClass = classData[selectedClass].characterClass;
-                player.health += classData[selectedClass].health;
+                player.maxHealth += classData[selectedClass].maxHealth;
                 player.strength += classData[selectedClass].strength;
                 player.intelligence += classData[selectedClass].intelligence;
             }
@@ -103,7 +103,7 @@ void CharacterCreation::processTraits(PlayerData& player) {
             exists = std::find(player.traits.begin(), player.traits.end(), traitData[selectedTrait].traitName) != player.traits.end();
             if (!exists && player.numberOfTraits < 2) {
                 player.traits.push_back(traitData[selectedTrait].traitName);
-                player.health += traitData[selectedTrait].healthModifier;
+                player.maxHealth += traitData[selectedTrait].healthModifier;
                 player.strength += traitData[selectedTrait].strengthModifier;
                 player.intelligence += traitData[selectedTrait].intelligenceModifier;
                 player.numberOfTraits++;
@@ -132,7 +132,7 @@ std::vector<std::string> CharacterCreation::getDetails() {
         "Name: " + player_.name,
         "Class: " + player_.characterClass,
         "Traits: " + traits,
-        "Health: " + std::to_string(player_.health),
+        "Health: " + std::to_string(player_.maxHealth),
         "Strength: " + std::to_string(player_.strength),
         "Intelligence: " + std::to_string(player_.intelligence),
         "Start game"

@@ -1,10 +1,18 @@
 #pragma once
 #include "World.hpp"
 #include "CharacterCreation.hpp"
+#include "Item.hpp"
 #include <algorithm>
 
 class Player {
 public:
+    struct Inventory {
+    Item equippedWeapon;
+    Item equippedArmor;
+    std::vector<Item> inventory_list;
+
+    };
+
     Player();
     Player(const CharacterCreation::PlayerData& playerData);
     void setCurrentLocation(World::Location loc);
@@ -18,6 +26,7 @@ public:
     std::vector<std::string> generateCharacterSheet() const;
 private:
     CharacterCreation::PlayerData player_;
+    Inventory inventory_;
     World::Location currentLocation_;
     World::SubLocation currentSubLocation_;
     std::vector<std::string> current_local_map_;

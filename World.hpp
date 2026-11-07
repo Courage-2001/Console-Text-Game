@@ -22,6 +22,7 @@ public:
 	struct SubLocation {
 		SubLocationID subID;
 		std::string sublocation_name;
+		std::vector<std::string> action_list;
 	};
 
 	struct Location {

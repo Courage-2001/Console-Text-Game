@@ -96,6 +96,7 @@ void Menu::navigateOptions(Keyboard& input, int& selectedOption, size_t optionCo
         else if (selectedOption == firstOption) {
             selectedOption = optionCount - 1;
         }
+        redraw_ = true;
         break;
     case Keyboard::DownArrow: // Down
         if (selectedOption < optionCount - 1) {

@@ -8,7 +8,8 @@ public:
 		std::string name = "ENTER NAME";
 		std::string characterClass = "ENTER CLASS";
 		std::vector<std::string> traits = {};
-		int health = 50;
+		int maxHealth = 50;
+		int currentHealth = maxHealth;
 		int strength = 10;
 		int intelligence = 10;
 		int numberOfTraits = 0;

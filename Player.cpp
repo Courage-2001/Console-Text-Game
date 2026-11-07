@@ -8,9 +8,23 @@ Player::Player() {
 
 Player::Player(const CharacterCreation::PlayerData& playerData) {
     player_ = playerData;
-    currentLocation_ = { World::LocationID::STARTING_TOWN, "PlaceHolder" };
-    currentSubLocation_ = { World::SubLocationID::TOWN_SQUARE, "Town Square" };
-    current_local_map_ = getCurrentLocationData(World::LocationID::STARTING_TOWN).local_map;
+    if (player_.characterClass == "Warrior") {
+        inventory_ = { 
+            { Item::ItemType::WEAPON, Item::ItemID::SWORD, "Sword", { 10, 0 } },
+            { Item::ItemType ::ARMOR, Item::ItemID::LEATHER_ARMOR, "Leather Armor", { 0, 10 } }, 
+            {}
+        };
+    }
+    else if (player_.characterClass == "Mage") {
+        inventory_ = {
+            { Item::ItemType::WEAPON, Item::ItemID::WAND, "Wand",{ 10, 0 } }, 
+            { Item::ItemType::ARMOR, Item::ItemID::NOVICE_ROBES, "Robes", { 0, 5} }, 
+            {}
+        };
+    }
+    currentLocation_ = getCurrentLocationData(World::LocationID::STARTING_TOWN);
+    setCurrentSubLocation(currentLocation_.subLocations[0]); // Town Square
+    setCurrentLocalMap(World::LocationID::STARTING_TOWN);
 }
 
 void Player::setCurrentLocation(World::Location loc) {
@@ -63,8 +77,11 @@ std::vector<std::string> Player::generateCharacterSheet() const {
         "Name: " + player_.name,
         "Class: " + player_.characterClass,
         "Traits: " + traits,
-        "Health: " + std::to_string(player_.health),
+        "Health: " + std::to_string(player_.currentHealth),
         "Strength: " + std::to_string(player_.strength),
         "Intelligence: " + std::to_string(player_.intelligence),
+        "Weapon: " + inventory_.equippedWeapon.item_name,
+        "  - Attack Damage: " + std::to_string(inventory_.equippedWeapon.stats.weapon_damage),
+        "Armor: " +inventory_.equippedArmor.item_name
     };
 }

@@ -86,17 +86,7 @@ void Game::executeAction(Menu::Keyboard& input, int& selectedOption, int& firstO
 	selectedOption = 0;
 	firstOption = 0;
 	bool actionSelected = false;
-	std::vector<std::string> actionList;
-
-	if (player_.getCurrentSubLocation().subID == World::SubLocationID::TOWN_SQUARE) {
-		actionList = { "Look at the quest board", "Stand around", "Return to previous menu"};
-	}
-	else if (player_.getCurrentSubLocation().subID == World::SubLocationID::BLACKSMITH) {
-		actionList = { "Forge a weapon", "Chat", "Return to previous menu"};
-	}
-	else if (player_.getCurrentSubLocation().subID == World::SubLocationID::GENERAL_STORE) {
-		actionList = { "Buy", "Sell", "Return to previous menu" };
-	}
+	std::vector<std::string> actionList = player_.getCurrentSubLocation().action_list;
 
 	while (actionSelected == false) {
 		if (redraw_ == true) {
@@ -105,7 +95,10 @@ void Game::executeAction(Menu::Keyboard& input, int& selectedOption, int& firstO
 		input = menu_.getInput();
 		menu_.navigateOptions(input, selectedOption, actionList.size(), firstOption, redraw_);
 		if (input == Menu::Keyboard::Enter) {
-			if(selectedOption == 2)
+			if (actionList[selectedOption] == "Explore") {
+				actionSelected = true;
+			}
+			else if(actionList[selectedOption] == "Return to previous menu")
 				actionSelected = true;
 		}
 	}
