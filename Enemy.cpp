@@ -1,14 +1,34 @@
 #include "Enemy.hpp"
 
 Enemy::Enemy() {
-	enemy_name = "";
-	max_health = 0;
-	current_health = 0;
-	damage = 0;
+	enemy_data_ = 
+	{
+		{ EnemyID::SLIME, { "Slime", "A slime approaches you, filled with curiosity...", 25, 25, 5, 
+		{
+			R"(                                              )",
+			R"(              __________________              )",
+			R"(            _/                  \_            )",
+			R"(          _/   / \         / \    \_          )",
+			R"(        _/    |  |         |  |     \_        )",
+			R"(      _/      |  |         |  |       \_      )",
+			R"(    _/         \ /          \ /         \     )",
+			R"(   |                                     |    )",
+			R"(   |                                     |    )",
+			R"(   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|    )",
+			R"(                                              )",
+			R"(                                              )",
+			R"(                                              )",
+			R"(                                              )",
+			R"(                                              )"
+	    } } 
+		},
+
+		{ EnemyID::NONE, { "None", "", 0, 0, 0,
+		{} } 
+		}
+	};
 }
-Enemy::Enemy(const std::string& enemy_name, int max_health, int current_health, int damage) :
-	enemy_name(enemy_name),
-	max_health(max_health),
-	current_health(current_health),
-	damage(damage) {
+
+Enemy::EnemyData Enemy::GetEnemyData(const EnemyID& enemyID) const {
+	return enemy_data_.at(enemyID);
 }

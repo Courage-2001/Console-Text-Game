@@ -39,6 +39,12 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.hpp">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Item.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleMenu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

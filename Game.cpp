@@ -8,17 +8,18 @@ Game::Game(const CharacterCreation::PlayerData& playerData) : player_(playerData
 	location_data_ = player_.getCurrentLocationData(player_.getCurrentLocation().locID);
 }
 
+// BUG: selecting Go To in menu, returning and then going to the Action menu deletes the vector actionList for the location (loss of data transfer)
 void Game::processInput(Menu::Keyboard& input, int selectedOption, int firstOption, bool& running, size_t optionCount) {
 	menu_.navigateOptions(input, selected_option_, optionCount, firstOption, redraw_);
 	if (input == Menu::Keyboard::Enter) {
-		if (selected_option_ == 5) {
+		if (selected_option_ == 5) { // Adventure to
 			Travel(input, selectedOption, firstOption);
 		}
-		else if (selected_option_ == 6) {
+		else if (selected_option_ == 6) { // Go to
 			std::vector<std::string> sublocationList = player_.getSubLocationStr(location_data_);
 			processLocalAction(input, selectedOption, firstOption, sublocationList);
 		}
-		else if (selected_option_ == 7) {
+		else if (selected_option_ == 7) { // Action
 			executeAction(input, selectedOption, firstOption);
 		}
 	}
@@ -31,8 +32,7 @@ void Game::processInput(Menu::Keyboard& input, int selectedOption, int firstOpti
 	}
 }
 
-// Great Plains works as fine, Forest will break due to access violation
-// Need to ensure every location has a minimum 1 sublocation
+
 void Game::Travel(Menu::Keyboard& input, int& selectedOption, int& firstOption) {
 	selectedOption = 0;
 	firstOption = 0;
@@ -59,6 +59,7 @@ void Game::Travel(Menu::Keyboard& input, int& selectedOption, int& firstOption) 
 	}
 }
 
+// BUG: When selecting return as part of sublocation list, displays current location as "Return" 
 void Game::processLocalAction(Menu::Keyboard& input, int& selectedOption, int& firstOption, std::vector<std::string>& subLocationList) {
 	selectedOption = 0;
 	firstOption = 0;
@@ -95,7 +96,10 @@ void Game::executeAction(Menu::Keyboard& input, int& selectedOption, int& firstO
 		input = menu_.getInput();
 		menu_.navigateOptions(input, selectedOption, actionList.size(), firstOption, redraw_);
 		if (input == Menu::Keyboard::Enter) {
-			if (actionList[selectedOption] == "Explore") {
+			if (actionList[selectedOption] == "Explore") { 
+				// Temporary code to test
+				battle_menu_.loadBattleMenu(Enemy::EnemyID::SLIME);
+				battle_menu_.displayBattleMenu(player_, enemy_.GetEnemyData(Enemy::EnemyID::SLIME));
 				actionSelected = true;
 			}
 			else if(actionList[selectedOption] == "Return to previous menu")
@@ -106,7 +110,7 @@ void Game::executeAction(Menu::Keyboard& input, int& selectedOption, int& firstO
 
 void Game::gameLoop() {
 	bool running = true;
-	menu_.displayLoadingScreen();
+	menu_.displayLoadingScreen(1);
 
 	while (running) {
 		menu_.displayActionMenu(getActionMenu(), player_.getLocalMap(), selected_option_, redraw_);

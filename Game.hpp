@@ -2,6 +2,7 @@
 #include "World.hpp"
 #include "Player.hpp"
 #include "Menu.hpp"
+#include "BattleMenu.hpp"
 #include "Enemy.hpp"
 
 class Game {
@@ -20,6 +21,8 @@ private:
     int first_option_ = 5;
     bool redraw_ = true;
     World::Location location_data_;
+    BattleMenu battle_menu_;
+    Enemy enemy_;
     World world_;
     Player player_;
     Menu menu_;

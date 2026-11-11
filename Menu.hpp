@@ -29,12 +29,12 @@ public:
 
     void displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw);
     void displayActionMenu(const std::vector<std::string>& menuOptions, const std::vector<std::string>& localmap, int selectedOption, bool& redraw);
-    void displayLoadingScreen();
+    void displayLoadingScreen(const int& loading_screen);
     Keyboard getInput() const;
     void navigateOptions(Keyboard& input, int& selectedOption, size_t optionCount, int& firstOption, bool& redraw);
 
 private:
-    std::vector<std::string> loading_screen_ = {
+    std::vector<std::string> loading_screen_1 = {
       R"(    |         _______          __          ______       +   |\      |    ___________  )",
       R"(    |        |       |        /  \        |      \          | \     |    |            )",
       R"(    |        |       |       /    \       |       \     |   |  \    |    |            )", 
@@ -42,6 +42,20 @@ private:
       R"(    |        |       |     /        \     |       |     |   |    \  |    |         |  )", 
       R"(    |        |       |    /          \    |       /     |   |     \ |    |         |  )",
       R"(    |_____   |_______|   /            \   |______/      |   |      \|    |_________|  )"
+    };
+
+    std::vector<std::string> loading_screen_2 = {
+        R"(                _________________                         _________________                         _________________                   )",
+        R"(               |                 \                       |                 \                       |                 \                  )",
+        R"(               \___________       \                      \___________       \                      \___________       \                 )",
+        R"(                           \      |                                  \      |                                  \      |                 )",
+        R"(                            \_____/                                   \_____/                                   \_____/                 )",
+        R"(                                                                                                                                        )",
+        R"(                  _____                              _____                              _____                              _____        )",
+        R"(                 /     \                            /     \                            /     \                            /     \       )",
+        R"(    ____________/      |               ____________/      |               ____________/      |               ____________/      |       )",
+        R"(   |                  /               |                  /               |                  /               |                  /        )",
+        R"(    \________________/                 \________________/                 \________________/                 \________________/         )"
     };
 };
 

@@ -140,7 +140,9 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleMenu.cpp" />
     <ClCompile Include="CharacterCreation.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -150,7 +152,9 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleMenu.hpp" />
     <ClInclude Include="CharacterCreation.hpp" />
+    <ClInclude Include="Enemy.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="MainMenu.hpp" />

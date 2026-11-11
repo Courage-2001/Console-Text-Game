@@ -43,12 +43,20 @@ void Menu::displayActionMenu(const std::vector<std::string>& menuOptions, const 
     }
 }
 
-void Menu::displayLoadingScreen() {
+void Menu::displayLoadingScreen(const int& loading_screen) {
     system("cls");
+    std::vector<std::string> loadingScreen;
+    if (loading_screen == 1) {
+        loadingScreen = loading_screen_1;
+    }
+    else if (loading_screen == 2) {
+        loadingScreen = loading_screen_2;
+    }
+
     // Gathering Dimensions of rows and columns (in this case how many characters exist in 1 row)
-    size_t rows = loading_screen_.size();
+    size_t rows = loadingScreen.size();
     size_t columns = 0;
-    for (const auto& line : loading_screen_) {
+    for (const auto& line : loadingScreen) {
         columns = std::max(columns, line.length());
     }
 
@@ -58,8 +66,8 @@ void Menu::displayLoadingScreen() {
         for (size_t row = 0; row < rows; row++) {
             std::cout << "\033[" << row + 1 << ";" << col + 1 << "H";
 
-            if (col < loading_screen_[row].length()) {
-                std::cout << loading_screen_[row][col]; 
+            if (col < loadingScreen[row].length()) {
+                std::cout << loadingScreen[row][col];
             }
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
