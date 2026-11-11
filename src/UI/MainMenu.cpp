@@ -1,4 +1,4 @@
-#include "MainMenu.hpp"
+#include "UI/MainMenu.hpp"
 
 void MainMenu::processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, bool& startCreation) {
     Menu menu;

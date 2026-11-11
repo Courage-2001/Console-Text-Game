@@ -1,5 +1,5 @@
 #pragma once
-#include "Menu.hpp"
+#include "UI/Menu.hpp"
 
 class World
 {

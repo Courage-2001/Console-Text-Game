@@ -1,4 +1,4 @@
-#include "World.hpp"
+#include "World/World.hpp"
 
 World::World() {
 	locations_ =

@@ -1,6 +1,6 @@
-#include "MainMenu.hpp"
-#include "CharacterCreation.hpp"
-#include "Game.hpp"
+#include "UI/MainMenu.hpp"
+#include "UI/CharacterCreation.hpp"
+#include "Core/Game.hpp"
 
 int main()
 {

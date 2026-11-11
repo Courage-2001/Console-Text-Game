@@ -1,9 +1,9 @@
 #pragma once
-#include "World.hpp"
-#include "Player.hpp"
-#include "Menu.hpp"
-#include "BattleMenu.hpp"
-#include "Enemy.hpp"
+#include "World/World.hpp"
+#include "Entity/Player.hpp"
+#include "UI/Menu.hpp"
+#include "UI/BattleMenu.hpp"
+#include "Entity/Enemy.hpp"
 
 class Game {
 public:

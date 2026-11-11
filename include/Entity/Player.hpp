@@ -1,7 +1,7 @@
 #pragma once
-#include "World.hpp"
-#include "CharacterCreation.hpp"
-#include "Item.hpp"
+#include "World/World.hpp"
+#include "UI/CharacterCreation.hpp"
+#include "Entity/Item.hpp"
 #include <algorithm>
 
 class Player {

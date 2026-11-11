@@ -1,4 +1,4 @@
-#include "Game.hpp"
+#include "Core/Game.hpp"
 
 Game::Game() {
 	location_data_ = player_.getCurrentLocationData(player_.getCurrentLocation().locID);

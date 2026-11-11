@@ -1,4 +1,4 @@
-#include "Menu.hpp"
+#include "UI/Menu.hpp"
 
 //Eventually need to pass in variable that dynamically changes menu title depending on which menu is active
 void Menu::displayMenu(const std::vector<std::string>& options, int selectedOption, bool& redraw) {

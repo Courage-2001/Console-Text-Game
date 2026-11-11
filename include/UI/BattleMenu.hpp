@@ -1,7 +1,7 @@
 #pragma once
-#include "Player.hpp"
-#include "Enemy.hpp"
-#include "Menu.hpp"
+#include "Entity/Player.hpp"
+#include "Entity/Enemy.hpp"
+#include "UI/Menu.hpp"
 
 class BattleMenu
 {

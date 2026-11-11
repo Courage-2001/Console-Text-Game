@@ -1,4 +1,4 @@
-#include "CharacterCreation.hpp"
+#include "UI/CharacterCreation.hpp"
 
 void CharacterCreation::processInput(Menu::Keyboard& input, int& selectedOption, int& firstOption, bool& running, size_t optionCount, bool& redraw, PlayerData& player, bool& startGame) {
     Menu menu;

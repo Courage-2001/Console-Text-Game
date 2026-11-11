@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "Entity/Player.hpp"
 
 Player::Player() {
     currentLocation_ = { World::LocationID::STARTING_TOWN, "PlaceHolder" };

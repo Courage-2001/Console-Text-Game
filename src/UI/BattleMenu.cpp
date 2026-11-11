@@ -1,4 +1,4 @@
-#include "BattleMenu.hpp"
+#include "UI/BattleMenu.hpp"
 
 // need to tweak loading screen time, and size of enemy encounter box
 // width is going to be an issue, depending on size of art, as well as length of description

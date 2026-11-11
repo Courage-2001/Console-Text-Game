@@ -1,4 +1,4 @@
-#include "Item.hpp"
+#include "Entity/Item.hpp"
 
 Item::Item() {
     item_type = ItemType::NONE;

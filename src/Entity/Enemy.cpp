@@ -1,4 +1,4 @@
-#include "Enemy.hpp"
+#include "Entity/Enemy.hpp"
 
 Enemy::Enemy() {
 	enemy_data_ = 
